@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.sql.Date;
 
 @Entity
+@Table(name = "staff")
 public class Staff {
 
     @Id
@@ -22,11 +23,7 @@ public class Staff {
     private String email;
 
 
-    @ColumnTransformer(
-            read = "password_decrypt(password)",
-            write = "password_encrypt(?)"
-    )
-    @Convert(converter = PasswordConverter.class)
+    @Column()
     private String password;
 
     @Column
