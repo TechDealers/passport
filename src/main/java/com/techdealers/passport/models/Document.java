@@ -1,5 +1,6 @@
 package com.techdealers.passport.models;
 
+import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -13,9 +14,12 @@ public class Document {
     @NotBlank
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="service_id", nullable = false)
-    private Service service;
+    @Column
+    @NotBlank
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "documents_services", joinColumns = { @JoinColumn(name = "document_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "service_id") })
+    private Set<Service> services;
 
     public Long getId() {
         return id;
@@ -29,11 +33,11 @@ public class Document {
         this.name = name;
     }
 
-    public Service getService() {
-        return service;
+    public Set<Service> getService() {
+        return services;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setService(Set<Service> services) {
+        this.services = services;
     }
 }

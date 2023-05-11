@@ -16,7 +16,7 @@ public class Service {
 
     @Column
     @NotBlank
-    @OneToMany(targetEntity = Document.class, cascade=CascadeType.ALL, mappedBy = "service")
+    @ManyToMany(targetEntity = Document.class, cascade = CascadeType.ALL, mappedBy = "services")
     private Set<Document> documents;
 
     public Long getId() {
